@@ -53,28 +53,50 @@ namespace Day15_HashTable
             }
             return linkedList;
         }
+        public void Remove(K key)
+        {
+            int position = GetArrayPosition(key);
+            LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(position);
+            bool itemFound = false;
+            KeyValue<K, V> foundItem = default(KeyValue<K, V>);
+            foreach (KeyValue<K, V> item in linkedList)
+            {
+                if (item.key.Equals(key))
+                {
+                    itemFound = true;
+                    foundItem = item;
+                }
+                if (itemFound)
+                {
+                    Console.WriteLine("Item Removed " + foundItem.key);
+                    linkedList.Remove(foundItem);
+                    break;
+                }
+            }
+        }
 
-        //public int GetFrequencyOfWords(V value)
-        //{
-        //    int count = 0;
-        //    if (items == null)
-        //    {
-        //        Console.WriteLine("Hash Table is Empty!");
-        //        return 0;
-        //    }
-        //    for (int i = 0; i < items.Length; i++)
-        //    {
-        //        LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(i);
-        //        foreach (KeyValue<K, V> item in linkedList)
-        //        {
-        //            if (item.value.Equals(value))
-        //                count++;
-            //    }
-            //}
-            //return count;
-        
 
-        public struct KeyValue<Ke, Va>
+    //public int GetFrequencyOfWords(V value)
+    //{
+    //    int count = 0;
+    //    if (items == null)
+    //    {
+    //        Console.WriteLine("Hash Table is Empty!");
+    //        return 0;
+    //    }
+    //    for (int i = 0; i < items.Length; i++)                               UC_1
+    //    {
+    //        LinkedList<KeyValue<K, V>> linkedList = GetLinkedList(i);
+    //        foreach (KeyValue<K, V> item in linkedList)
+    //        {
+    //            if (item.value.Equals(value))
+    //                count++;
+    //    }
+    //}
+    //return count;
+
+
+    public struct KeyValue<Ke, Va>
         {
             public Ke key { get; set; }
             public Va value { get; set; }
